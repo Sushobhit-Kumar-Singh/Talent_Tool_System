@@ -1,0 +1,289 @@
+<div class="container">
+  <div class="container">
+    <div class="togglebar">
+      <h4 class="text-left">
+        {{ !isCandidateSearch ? "Demand Search" : "Candidate Search" }}
+      </h4>
+      <button class="text-right btn togglebtn" (click)="toggleSearch()">
+        {{ isCandidateSearch ? "Demand Search" : "Candidate Search" }}
+      </button>
+    </div>
+    <form *ngIf="isCandidateSearch" [formGroup]="candidateForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Account">Account</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Account"
+              name="Account"
+              formControlName="Account"
+            />
+          </div>
+          <div class="form-group">
+            <label for="CandidateName">Candidate Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="CandidateName"
+              name="CandidateName"
+              formControlName="CandidateName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="Status">Status</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Status"
+              name="Status"
+              formControlName="Status"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Manager">Manager</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Manager"
+              name="Manager"
+              formControlName="Manager"
+            />
+          </div>
+          <div class="form-group">
+            <label for="Location">Location</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Location"
+              name="Location"
+              formControlName="Location"
+            />
+          </div>
+          <div class="form-group">
+            <label for="ReferralId">Employee Id</label>
+            <input
+              type="number"
+              class="form-control"
+              id="ReferralId"
+              name="ReferralId"
+              formControlName="ReferralId"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="text-left">
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="submitCandidateForm()"
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="clearForm()"
+        >
+          Clear
+        </button>
+      </div>
+    </form>
+    <form *ngIf="!isCandidateSearch" [formGroup]="demandForm">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Account">Account</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Account"
+              name="Account"
+              formControlName="Account"
+            />
+          </div>
+          <div class="form-group">
+            <label for="CandidateName">Demand</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Demand"
+              name="Demand"
+              formControlName="Demand"
+            />
+          </div>
+          <div class="form-group">
+            <label for="Status">Status</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Status"
+              name="Status"
+              formControlName="Status"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Manager">Manager</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Manager"
+              name="Manager"
+              formControlName="Manager"
+            />
+          </div>
+          <div class="form-group">
+            <label for="Location">Location</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Location"
+              name="Location"
+              formControlName="Location"
+            />
+          </div>
+          <div class="form-group">
+            <label for="EmployeeType">Employee Type</label>
+            <input
+              type="text"
+              class="form-control"
+              id="EmployeeType"
+              name="EmployeeType"
+              formControlName="EmployeeType"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        (click)="submitDemandForm()"
+      >
+        Search
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        (click)="clearForm()"
+      >
+        Clear
+      </button>
+    </form>
+  </div>
+  <p *ngIf="response !== ''">{{ response }}</p>
+  <div *ngIf="formdataArray.length > 0" class="results">
+    <h3>Results: </h3>
+    <fa-icon (click)="exportToExcel()" class="btn btn-primary" [icon]="excel"></fa-icon>
+  </div>
+  <div class="table-container">
+    <table class="styled-table" *ngIf="isCandidateSearch && formdataArray.length > 0">
+      <thead>
+        <tr class="text-center">
+          <th>SI.No</th>
+          <th>Candidate Name</th>
+          <th>Account</th>
+          <th>Manager</th>
+          <th>Status</th>
+          <th>ECTC</th>
+          <th>Skills</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Experience (Yrs)</th>
+          <th>Current Company</th>
+          <th>CTC</th>
+          <th>Location</th>
+          <th>Notice Period</th>
+          <th>Employee Id</th>
+          <!-- <th>Action</th> -->
+        </tr>
+      </thead>
+      <tbody *ngFor="let dataForm of formdataArray; let i = index">
+        <tr class="text-center">
+          <td>{{ i + 1 }}</td>
+          <td>{{ dataForm.candidateName }}</td>
+          <td>{{ dataForm.account }}</td>
+          <td>{{ dataForm.manager }}</td>
+          <td>{{ dataForm.status }}</td>
+          <td>{{ dataForm.ectc }}</td>
+          <td>{{ dataForm.skillSet }}</td>
+          <td>{{ dataForm.email }}</td>
+          <td>{{ dataForm.mobile }}</td>
+          <td>{{ dataForm.yearOfExperience }}</td>
+          <td>{{ dataForm.currentCompany }}</td>
+          <td>{{ dataForm.ctc }}</td>
+          <td>{{ dataForm.location }}</td>
+          <td>{{ dataForm.noticePeriod }}</td>
+          <td>{{ dataForm.referralId }}</td>
+          <td class="text-center d-flex">
+            <!-- <fa-icon class="btn btn-primary" [icon]="view"></fa-icon>
+            <fa-icon class="btn btn-primary" [icon]="edit"></fa-icon>
+            <fa-icon class="btn btn-danger" [icon]="delete"></fa-icon> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="styled-table" *ngIf="!isCandidateSearch && formdataArray.length > 0">
+      <thead>
+        <tr class="text-center">
+          <th>SI.No</th>
+          <th>Demand Name</th>
+          <th>Email</th>
+          <th>Account</th>
+          <th>Manager</th>
+          <th>Open Positions</th>
+          <th>Experience</th>
+          <th>Max Budget</th>
+          <th>Notice Period</th>
+          <th>Employee Type</th>
+          <th>Status</th>
+          <th>Location</th>
+<<<<<<< HEAD
+          <!-- <th>Action</th> -->
+          <!-- <th>Skill Set</th> -->
+=======
+          <th>Skill Set</th>
+          <!-- <th>Action</th> -->
+>>>>>>> b7218fe06a8902d815a09a0bf4c00f037d224c60
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="text-center"
+          *ngFor="let dataForm of formdataArray; let i = index"
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ dataForm.demandName }}</td>
+          <td>{{ dataForm.email }}</td>
+          <td>{{ dataForm.accountName }}</td>
+          <td>{{ dataForm.manager }}</td>
+          <td>{{ dataForm.openPosition }}</td>
+          <td>{{ dataForm.experience }}</td>
+          <td>{{ dataForm.maxBudget }}</td>
+          <td>{{ dataForm.noticePeriod }}</td>
+          <td>{{ dataForm.employeeType }}</td>
+          <td>{{ dataForm.status }}</td>
+          <td>{{ dataForm.location }}</td>
+<<<<<<< HEAD
+          <td class="text-center d-flex">
+            <!-- <fa-icon class="btn btn-primary" [icon]="view"></fa-icon>
+            <fa-icon class="btn btn-primary" [icon]="edit"></fa-icon>
+            <fa-icon class="btn btn-danger" [icon]="delete"></fa-icon> -->
+          </td>
+=======
+          <td>{{ dataForm.skills }}</td>
+          <!-- <td class="text-center d-flex">
+            <fa-icon class="btn btn-primary" [icon]="view"></fa-icon>
+            <fa-icon class="btn btn-primary" [icon]="edit"></fa-icon>
+            <fa-icon class="btn btn-danger" [icon]="delete"></fa-icon>
+          </td> -->
+>>>>>>> b7218fe06a8902d815a09a0bf4c00f037d224c60
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

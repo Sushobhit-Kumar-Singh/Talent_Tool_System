@@ -1,0 +1,64 @@
+<div class="container">
+  <header>
+    <button
+      type="button"
+      [ngClass]="{ active: view === 'demand' }"
+      (click)="view = 'demand'"
+    >
+      Demand Logs
+    </button>
+    <button
+      type="button"
+      [ngClass]="{ active: view === 'candidate' }"
+      (click)="view = 'candidate'"
+    >
+      Candidate Logs
+    </button>
+  </header>
+
+  <hr />
+  <div *ngIf="view === 'candidate'">
+    <h1 class="styled-heading">Candidate Logs</h1>
+    <h3 [ngStyle]="{ color: 'red' }" *ngIf="isCandidateNull">*{{ message }}</h3>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Candidate Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of candidates">
+          <td>{{ candidate.candidateName }}</td>
+          <td>{{ candidate.email }}</td>
+          <td>{{ candidate.mobile }}</td>
+          <td>{{ candidate.location }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="view === 'demand'">
+    <h1 class="styled-heading">Demand Logs</h1>
+    <h3 [ngStyle]="{ color: 'red' }" *ngIf="isDemandNull">*{{ message }}</h3>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Demand Name</th>
+          <th>Email</th>
+          <th>Manager</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let demand of demands">
+          <td>{{ demand.demandName }}</td>
+          <td>{{ demand.email }}</td>
+          <td>{{ demand.manager }}</td>
+          <td>{{ demand.location }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

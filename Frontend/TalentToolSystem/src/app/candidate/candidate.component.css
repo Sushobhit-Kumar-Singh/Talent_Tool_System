@@ -1,0 +1,48 @@
+.form-group label {
+  display: inline-block;
+  width: 30%; /* Adjust the width as needed */
+  margin-right: 10px; /* Add spacing between label and input */
+  font-size: 15px;
+}
+
+.form-group input {
+  display: inline-block;
+  width: 30%; /* Adjust the width as needed */
+  border: 1px solid green;
+  margin-bottom: 20px;
+  border-radius: 0%;
+  padding: 4px;
+}
+
+.column-container {
+  margin-left: -10px; /* Adjust the negative margin as needed */
+  margin-right: -10px; /* Adjust the negative margin as needed */
+}
+
+.column-container .col-md-6 {
+  padding-left: 10px; /* Adjust the padding as needed */
+  padding-right: 10px; /* Adjust the padding as needed */
+  width:40%;
+}
+
+.container{
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.text-left {
+  color: #009879; /* Set the text color to yellow */
+  margin-bottom: 20px; /* Add space below the text */
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.btn{
+  margin-top: 0%;
+  margin:10px;
+}
+
+mat-error{
+  color:red;
+  font-size: 14px;
+}
